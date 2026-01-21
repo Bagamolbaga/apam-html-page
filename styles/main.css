@@ -108,7 +108,7 @@ iframe {
 .iframe-wrapper-error {
   margin-top: 1rem;
   font-weight: 600;
-  color: red;
+  color: var(--text);
   display: none;
 }
 /* CONTENT BLOCK END */
@@ -205,7 +205,7 @@ footer .footer-contact a {
   }
 
   footer .footer-container .footer-left p {
-    margin-left: 60px;
+    margin-left: 0px;
   }
 
   footer .footer-container img {
