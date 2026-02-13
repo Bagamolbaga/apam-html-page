@@ -75,7 +75,11 @@
       // Transform Cloudinary response to our image format
       allImages = data.resources.map(resource => ({
         public_id: resource.public_id,
-        url: `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/c_fill,w_600,h_400,q_auto,f_auto/${resource.public_id}`,
+        // Small preview for slider - optimized for speed
+        // w_400 for mobile, w_600 for desktop, q_60 for faster loading
+        urlSmall: `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/c_fill,w_400,h_267,q_60,f_webp/${resource.public_id}`,
+        url: `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/c_fill,w_600,h_400,q_60,f_webp/${resource.public_id}`,
+        // Full quality for lightbox
         fullUrl: `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/q_auto,f_auto/${resource.public_id}`,
         width: resource.width,
         height: resource.height,
@@ -88,6 +92,7 @@
       renderSlider();
       updatePagination();
       startAutoPlay();
+      preloadSliderNeighbors();
     } catch (error) {
       console.error('Error fetching images:', error);
       displayErrorMessage();
@@ -108,13 +113,23 @@
       slide.setAttribute('data-index', index);
 
       const img = document.createElement('img');
-      img.src = image.url;
+      // Use smaller image for faster initial load, then upgrade quality
+      img.src = image.urlSmall;
       img.alt = `Conference Photo ${index + 1}`;
-      img.loading = 'lazy';
+      img.loading = index < getVisibleSlidesCount() + 1 ? 'eager' : 'lazy';
       
       // Add loaded class when image finishes loading
       img.onload = function() {
         img.classList.add('loaded');
+        
+        // After small image loads, preload higher quality version
+        if (img.src === image.urlSmall) {
+          const highQualityImg = new Image();
+          highQualityImg.src = image.url;
+          highQualityImg.onload = function() {
+            img.src = image.url;
+          };
+        }
       };
       
       // Handle cached images that load instantly
@@ -178,6 +193,7 @@
     currentSlide = Math.max(0, Math.min(slideIndex, maxSlide));
     updateSliderPosition();
     updatePagination();
+    preloadSliderNeighbors();
   }
 
   function nextSlide() {
@@ -188,6 +204,7 @@
     } else {
       goToSlide(currentSlide + 1);
     }
+    preloadSliderNeighbors();
   }
 
   function prevSlide() {
@@ -218,6 +235,7 @@
   function openLightbox(index) {
     currentLightboxIndex = index;
     updateLightboxImage();
+    preloadLightboxNeighbors();
 
     if (lightbox) {
       lightbox.classList.add('active');
@@ -242,18 +260,43 @@
     // Remove loaded class while loading new image
     lightboxImage.classList.remove('loaded');
     
-    lightboxImage.src = image.fullUrl;
-    lightboxImage.alt = `Conference Photo ${currentLightboxIndex + 1}`;
+    // Clear any previous onload handlers
+    lightboxImage.onload = null;
     
-    // Add loaded class when image finishes loading
-    lightboxImage.onload = function() {
-      lightboxImage.classList.add('loaded');
+    // Use medium quality for initial display, then upgrade to full
+    const mediumQualityUrl = `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/w_1200,q_60,f_webp/${image.public_id}`;
+    
+    // Create a temporary image to preload
+    const tempImg = new Image();
+    tempImg.src = mediumQualityUrl;
+    
+    tempImg.onload = function() {
+      // Only update if we're still on the same image
+      if (currentLightboxIndex === allImages.indexOf(image)) {
+        lightboxImage.src = mediumQualityUrl;
+        lightboxImage.alt = `Conference Photo ${currentLightboxIndex + 1}`;
+        lightboxImage.classList.add('loaded');
+        
+        // Preload full quality version in background
+        const fullQualityImg = new Image();
+        fullQualityImg.src = image.fullUrl;
+        fullQualityImg.onload = function() {
+          // Only update if we're still on the same image
+          if (currentLightboxIndex === allImages.indexOf(image) && lightboxImage.src === mediumQualityUrl) {
+            lightboxImage.src = image.fullUrl;
+          }
+        };
+      }
     };
     
-    // Handle cached images
-    if (lightboxImage.complete) {
-      lightboxImage.classList.add('loaded');
-    }
+    tempImg.onerror = function() {
+      // If medium quality fails, try full quality
+      lightboxImage.src = image.fullUrl;
+      lightboxImage.alt = `Conference Photo ${currentLightboxIndex + 1}`;
+      lightboxImage.onload = function() {
+        lightboxImage.classList.add('loaded');
+      };
+    };
 
     if (lightboxCounterCurrent) {
       lightboxCounterCurrent.textContent = currentLightboxIndex + 1;
@@ -266,11 +309,39 @@
   function nextLightboxImage() {
     currentLightboxIndex = (currentLightboxIndex + 1) % allImages.length;
     updateLightboxImage();
+    preloadLightboxNeighbors();
   }
 
   function prevLightboxImage() {
     currentLightboxIndex = (currentLightboxIndex - 1 + allImages.length) % allImages.length;
     updateLightboxImage();
+    preloadLightboxNeighbors();
+  }
+
+  // Preload next and previous images in lightbox
+  function preloadLightboxNeighbors() {
+    const prevIndex = (currentLightboxIndex - 1 + allImages.length) % allImages.length;
+    const nextIndex = (currentLightboxIndex + 1) % allImages.length;
+    
+    [prevIndex, nextIndex].forEach(index => {
+      const image = allImages[index];
+      const preloadImg = new Image();
+      preloadImg.src = `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/w_1200,q_60,f_webp/${image.public_id}`;
+    });
+  }
+
+  // Preload visible slides and next batch of images
+  function preloadSliderNeighbors() {
+    const visibleCount = getVisibleSlidesCount();
+    const startIndex = currentSlide;
+    const endIndex = Math.min(allImages.length, currentSlide + visibleCount + 2);
+    
+    for (let i = startIndex; i < endIndex; i++) {
+      if (allImages[i]) {
+        const preloadImg = new Image();
+        preloadImg.src = allImages[i].url;
+      }
+    }
   }
 
   // Event listeners
