@@ -154,14 +154,7 @@
     const offset = -currentSlide * (slideWidth + 16); // 16px is the gap
     sliderTrack.style.transform = `translateX(${offset}px)`;
 
-    // Update button states
-    if (sliderPrev) {
-      sliderPrev.disabled = currentSlide === 0;
-    }
-    if (sliderNext) {
-      const maxSlide = Math.max(0, allImages.length - getVisibleSlidesCount());
-      sliderNext.disabled = currentSlide >= maxSlide;
-    }
+    // Buttons always enabled for infinite scroll
   }
 
   // Get slide width based on viewport
@@ -208,7 +201,13 @@
   }
 
   function prevSlide() {
-    goToSlide(currentSlide - 1);
+    const maxSlide = Math.max(0, allImages.length - getVisibleSlidesCount());
+    if (currentSlide <= 0) {
+      goToSlide(maxSlide);
+    } else {
+      goToSlide(currentSlide - 1);
+    }
+    preloadSliderNeighbors();
   }
 
   // Auto-play functions
