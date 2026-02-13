@@ -214,6 +214,8 @@
   // Auto-play functions
   function startAutoPlay() {
     if (autoPlayTimer) return;
+    // Only start auto-play if lightbox is not active
+    if (lightbox && lightbox.classList.contains('active')) return;
     autoPlayTimer = setInterval(() => {
       nextSlide();
     }, AUTO_PLAY_INTERVAL);
