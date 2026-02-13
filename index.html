@@ -76,7 +76,83 @@
           >
         </div>
       </div>
+
+      <!-- Gallery Section -->
+      <section class="gallery-section">
+        <h2 class="gallery-title">Inaugural PAFMA Conference</h2>
+        <p class="gallery-subtitle">
+          The APAM Data Hub was launched at the Inaugural PAFMA Conference held in Nairobi
+          on 27 and 28 January 2026.
+        </p>
+
+        <div class="gallery-slider">
+          <button class="slider-btn slider-prev" aria-label="Previous slide">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <div class="slider-container">
+            <div class="slider-track">
+              <!-- Images will be loaded here by JavaScript -->
+            </div>
+          </div>
+
+          <button class="slider-btn slider-next" aria-label="Next slide">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="slider-pagination">
+          <span class="pagination-current">1</span>
+          <span class="pagination-separator">/</span>
+          <span class="pagination-total">1</span>
+        </div>
+      </section>
+
+      <!-- Lightbox -->
+      <div class="lightbox">
+        <button class="lightbox-close" aria-label="Close lightbox">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="lightbox-nav lightbox-prev desktop-nav" aria-label="Previous image">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="lightbox-nav lightbox-next desktop-nav" aria-label="Next image">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="lightbox-content">
+          <img class="lightbox-image" src="" alt="">
+          <div class="lightbox-counter">
+            <span class="lightbox-counter-current">1</span>
+            <span class="lightbox-separator">/</span>
+            <span class="lightbox-counter-total">1</span>
+          </div>
+          <div class="lightbox-mobile-nav">
+            <button class="lightbox-nav lightbox-prev" aria-label="Previous image">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button class="lightbox-nav lightbox-next" aria-label="Next image">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
     </main>
+
+    <script src="js/gallery.js"></script>
 
     <footer>
       <div class="footer-container">
