@@ -1,0 +1,28 @@
+.react {
+  width: 100%;
+}
+
+.country-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.linksContainerStyle {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+  .country-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .linksContainerStyle {
+    flex-direction: column;
+    align-items: end;
+  }
+}
