@@ -6,7 +6,7 @@
 
   // Configuration
   const CLOUDINARY_CLOUD_NAME = 'dobdjgonp';
-  const CLOUDINARY_TAG = 'for-landing';
+  const CLOUDINARY_TAG = 'landing-gallery';
   const IMAGES_PER_SLIDE = 3; // Number of images visible at once on desktop
   const AUTO_PLAY_INTERVAL = 5000; // 5 seconds in milliseconds
 
@@ -75,11 +75,8 @@
       // Transform Cloudinary response to our image format
       allImages = data.resources.map(resource => ({
         public_id: resource.public_id,
-        // Small preview for slider - optimized for speed
-        // w_400 for mobile, w_600 for desktop, q_60 for faster loading
         urlSmall: `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/c_fill,w_400,h_267,q_60,f_webp/${resource.public_id}`,
         url: `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/c_fill,w_600,h_400,q_60,f_webp/${resource.public_id}`,
-        // Full quality for lightbox
         fullUrl: `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/q_auto,f_auto/${resource.public_id}`,
         width: resource.width,
         height: resource.height,
