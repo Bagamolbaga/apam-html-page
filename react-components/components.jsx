@@ -1,10 +1,12 @@
 const CLOUDINARY_CLOUD_NAME = 'dobdjgonp';
 
+const PRIMARY_COLOR = '#0f7b85';
+
 const getCloudinaryUrl = (publicId) => {
   return `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/${publicId}.pdf`;
 };
 
-function CountryCard({ country }) {
+function CountryCard({ country, tab }) {
   const cardStyle = {
     display: 'flex',
     alignItems: 'center',
@@ -61,10 +63,6 @@ function CountryCard({ country }) {
     pointerEvents: 'none',
   };
 
-  // Check if PDF is loaded from Cloudinary (not a local path)
-  const isAssetLoaded = country.assetManagementPdf;
-  const isPensionsHave = country.pensionsPdf;
-
   return (
     <div style={cardStyle}>
       <img
@@ -74,7 +72,7 @@ function CountryCard({ country }) {
       />
       <span style={nameStyle}>{country.name}</span>
       <div className="linksContainerStyle">
-        {isAssetLoaded ? (
+        {tab === "assetManagement" ? (
           <a
             href={getCloudinaryUrl(country.assetManagementPdf)}
             target="_blank"
@@ -107,7 +105,7 @@ function CountryCard({ country }) {
           </a>
         ) : null}
 
-        {isPensionsHave ? (
+        {tab === "pensions" ? (
           <a
             href={getCloudinaryUrl(country.pensionsPdf)}
             target="_blank"
@@ -143,3 +141,41 @@ function CountryCard({ country }) {
     </div>
   );
 }
+
+const BUTTON_TEXT_DEFAULT = '#627384';
+const BUTTON_TEXT_ACTIVE = '#ffffff';
+const BUTTON_BG_ACTIVE = '#0f7b85';
+const BUTTON_BG_HOVER = '#0f7b8550';
+const BUTTON_BG_DEFAULT = '#f3f5f7';
+
+const Button = ({ onClick, isActive, children }) => {
+  const buttonStyle = {
+    padding: '12px 24px',
+    borderRadius: '6px',
+    border: 'none',
+    backgroundColor: isActive ? BUTTON_BG_ACTIVE : BUTTON_BG_DEFAULT,
+    color: isActive ? BUTTON_TEXT_ACTIVE : BUTTON_TEXT_DEFAULT,
+    fontSize: '14px',
+    cursor: 'pointer',
+    transition: 'background-color 0.2s',
+  };
+
+  const buttonHoverStyle = {
+    backgroundColor: !isActive ? BUTTON_BG_HOVER : undefined,
+  };
+
+  return (
+    <button
+      style={buttonStyle}
+      onClick={onClick}
+      onMouseEnter={(e) =>
+        (e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor)
+      }
+      onMouseLeave={(e) =>
+        (e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor)
+      }
+    >
+      {children}
+    </button>
+  );
+};

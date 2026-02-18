@@ -11,6 +11,17 @@
     <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="styles/main.css" />
     <link rel="stylesheet" href="react-components/style.css" />
+    <!-- React CDN -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   </head>
   <body>
     <header>
@@ -54,15 +65,15 @@
     </div>
 
     <main class="insights-page-main">
-      <div class="iframe-wrapper">
-        <iframe
-          src="https://app.powerbi.com/view?r=eyJrIjoiNjgyMDU0YTgtZDBlMC00ZjBkLTg4MTEtNjhhMWNiNGRmMjdjIiwidCI6IjNiN2Y0NDExLTNiNzYtNDdhOS05ZGQ2LTY3YjY5MjhmZDg4MyJ9"
-          title="APAM Data Placeholder"
-        ></iframe>
-      </div>
-
       <p class="iframe-wrapper-error">The dashboard is best viewed on desktop</p>
-     
+      <!-- React Container -->
+      <div class="react"></div>
+
+      <!-- React Components -->
+      <script type="text/babel" src="react-components/components.jsx"></script>
+      <script type="text/babel" src="react-components/input.jsx"></script>
+      <script type="text/babel" src="react-components/App.jsx"></script>
+
       <div class="home-page-link-container">
         <a href="/" class="home-page-link">Back to Home Page</a>
       </div>

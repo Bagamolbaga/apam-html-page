@@ -332,6 +332,7 @@ const countries = [
 
 // Main App Component - displays all countries in 2 columns with search
 function App() {
+  const [tab, setTab] = useState('assetManagement');
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
@@ -378,8 +379,16 @@ function App() {
       result = result.filter((country) => country.name.toLowerCase().includes(query));
     }
 
-    return result;
-  }, [searchQuery]);
+    return result.filter((country) => {
+      if (tab === 'assetManagement') {
+        return !!country.assetManagementPdf;
+      }
+
+      if (tab === 'pensions') {
+        return !!country.pensionsPdf;
+      }
+    })
+  }, [searchQuery, tab]);
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
@@ -388,9 +397,20 @@ function App() {
   return (
     <div style={containerStyle}>
       <p style={subtitleStyle}>
-        Browse pension and asset management reports by country. Each
-        country features two downloadable reports.
+        Browse pension and asset management reports by country. Each country features two
+        downloadable reports.
       </p>
+      <div style={{ display: 'flex', gap: '4px', marginBottom: '30px' }}>
+        <Button
+          isActive={tab === 'assetManagement'}
+          onClick={() => setTab('assetManagement')}
+        >
+          Asset Management
+        </Button>
+        <Button isActive={tab === 'pensions'} onClick={() => setTab('pensions')}>
+          Pensions
+        </Button>
+      </div>
       <div style={inputContainerStyle}>
         <Input
           value={searchQuery}
@@ -400,7 +420,7 @@ function App() {
       </div>
       <div className="country-grid">
         {filteredCountries.map((country) => (
-          <CountryCard key={country.name} country={country} />
+          <CountryCard key={country.name} country={country} tab={tab} />
         ))}
       </div>
       {filteredCountries.length === 0 && (

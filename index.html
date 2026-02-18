@@ -16,6 +16,18 @@
       <a href="https://pafma.org/" target="_blank" rel="noopener noreferrer">
         <img class="header-img pafma" src="assets\PAFMALogo.png" alt="" />
       </a>
+      <nav class="main-nav">
+        <button class="burger-menu" aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-links">
+          <li><a href="/" class="nav-link active">Home</a></li>
+          <li><a href="/insights.html" class="nav-link">Insights</a></li>
+          <li><a href="/country-reports.html" class="nav-link">Country reports</a></li>
+        </ul>
+      </nav>
       <a href="https://www.africapsa.org/" target="_blank" rel="noopener noreferrer">
         <img
           class="header-img apsa"
@@ -23,6 +35,13 @@
           alt=""
         />
       </a>
+      <nav class="mobile-nav">
+        <ul class="nav-links">
+          <li><a href="/" class="nav-link active">Home</a></li>
+          <li><a href="/insights.html" class="nav-link">Insights</a></li>
+          <li><a href="/country-reports.html" class="nav-link">Country reports</a></li>
+        </ul>
+      </nav>
     </header>
 
     <div class="full-width-container">
@@ -61,7 +80,10 @@
 
         <div class="video-container">
           <video controls width="100%">
-            <source src="https://res.cloudinary.com/dobdjgonp/video/upload/v1770813925/APAM_DATA_HUB_LAUNCH_rllxf5.mp4" type="video/mp4" />
+            <source
+              src="https://res.cloudinary.com/dobdjgonp/video/upload/v1770813925/APAM_DATA_HUB_LAUNCH_rllxf5.mp4"
+              type="video/mp4"
+            />
             Your browser does not support the video tag.
           </video>
         </div>
@@ -87,8 +109,20 @@
 
         <div class="gallery-slider">
           <button class="slider-btn slider-prev" aria-label="Previous slide">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15 18L9 12L15 6"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
             </svg>
           </button>
 
@@ -99,8 +133,20 @@
           </div>
 
           <button class="slider-btn slider-next" aria-label="Next slide">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9 18L15 12L9 6"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
             </svg>
           </button>
         </div>
@@ -115,22 +161,61 @@
       <!-- Lightbox -->
       <div class="lightbox">
         <button class="lightbox-close" aria-label="Close lightbox">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M18 6L6 18M6 6L18 18"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
         </button>
-        <button class="lightbox-nav lightbox-prev desktop-nav" aria-label="Previous image">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <button
+          class="lightbox-nav lightbox-prev desktop-nav"
+          aria-label="Previous image"
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M15 18L9 12L15 6"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
         </button>
         <button class="lightbox-nav lightbox-next desktop-nav" aria-label="Next image">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M9 18L15 12L9 6"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
         </button>
         <div class="lightbox-content">
-          <img class="lightbox-image" src="" alt="">
+          <img class="lightbox-image" src="" alt="" />
           <div class="lightbox-counter">
             <span class="lightbox-counter-current">1</span>
             <span class="lightbox-separator">/</span>
@@ -138,13 +223,37 @@
           </div>
           <div class="lightbox-mobile-nav">
             <button class="lightbox-nav lightbox-prev" aria-label="Previous image">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M15 18L9 12L15 6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
               </svg>
             </button>
             <button class="lightbox-nav lightbox-next" aria-label="Next image">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M9 18L15 12L9 6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
               </svg>
             </button>
           </div>
@@ -153,6 +262,7 @@
     </main>
 
     <script src="js/gallery.js"></script>
+    <script src="js/burger-menu.js"></script>
 
     <footer>
       <div class="footer-container">
